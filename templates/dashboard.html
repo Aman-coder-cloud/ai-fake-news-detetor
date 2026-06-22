@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Analytics Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🛡️ Fake News AI
+    </div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/detector">Detector</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/about">About</a>
+    </div>
+
+</nav>
+
+<div class="detector-container">
+
+    <h1>📊 Analytics Dashboard</h1>
+
+    <p class="subtitle">
+        View prediction statistics and model performance.
+    </p>
+
+    <div class="stats">
+
+        <div class="card">
+            <h2>{{ total }}</h2>
+            <p>Total Predictions</p>
+        </div>
+
+        <div class="card">
+            <h2>{{ real_count }}</h2>
+            <p>Real News</p>
+        </div>
+
+        <div class="card">
+            <h2>{{ fake_count }}</h2>
+            <p>Fake News</p>
+        </div>
+
+    </div>
+
+    <h2 style="margin-top:40px;">
+        📈 Prediction Distribution
+    </h2>
+
+    {% if total > 0 %}
+
+    <img
+        src="{{ url_for('static',
+        filename='pie_chart.png') }}"
+        width="450"
+        alt="Pie Chart">
+
+    {% else %}
+
+    <p>No predictions available yet.</p>
+
+    {% endif %}
+
+    <h2 style="margin-top:40px;">
+        📜 Recent Prediction Logs
+    </h2>
+
+    <table class="logs-table">
+
+        <tr>
+            <th>Result</th>
+            <th>Confidence</th>
+            <th>Date & Time</th>
+        </tr>
+
+        {% for log in logs %}
+
+        <tr>
+            <td>{{ log[0] }}</td>
+            <td>{{ log[1] }}%</td>
+            <td>{{ log[2] }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+<footer>
+    <p>
+        Developed by Amandeep Singh | BCA Project 2026
+    </p>
+</footer>
+
+</body>
+</html>

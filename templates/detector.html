@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Fake News Detector</title>
+
+```
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+```
+
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">🛡️ Fake News AI</div>
+
+```
+<div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/detector">Detector</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/about">About</a>
+</div>
+```
+
+</nav>
+
+<div class="detector-container">
+
+```
+<h1>📰 AI Fake News Detector</h1>
+
+<p class="subtitle">
+    Paste a news article or headline below and let AI determine whether it is Real or Fake.
+</p>
+
+<form action="/predict" method="POST">
+
+    <textarea
+        name="news"
+        placeholder="Paste news article here..."
+        required></textarea>
+
+    <button type="submit">
+        Analyze News
+    </button>
+
+</form>
+
+{% if result %}
+
+<div class="result-box {{ result_class }}">
+
+    <h2>{{ result }}</h2>
+
+    <h3>
+        Confidence Score: {{ confidence_score }}%
+    </h3>
+
+    <div class="confidence-bar">
+        <div class="confidence-fill"
+             style="width: {{ confidence_score }}%;">
+        </div>
+    </div>
+
+</div>
+
+{% endif %}
+
+{% if history %}
+
+<div class="history-box">
+
+    <h2>📜 Recent Predictions</h2>
+
+    <ul>
+
+        {% for item in history %}
+        <li>{{ item }}</li>
+        {% endfor %}
+
+    </ul>
+
+    <a href="/clear-history" class="clear-btn">
+        Clear History
+    </a>
+
+</div>
+
+{% endif %}
+```
+
+</div>
+
+<footer>
+    <p>
+        Developed by Amandeep Singh | BCA Project 2026
+    </p>
+</footer>
+
+</body>
+</html>
